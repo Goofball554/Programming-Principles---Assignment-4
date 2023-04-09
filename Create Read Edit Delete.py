@@ -15,10 +15,10 @@ class UserInteraction:
             userInput = 0
 
         if userInput == 1:
-            Create()
+            Create.Creating()
 
         elif userInput == 2:
-            Read()
+            Read.Reading()
 
         elif userInput == 3:
             Edit()
@@ -40,8 +40,9 @@ class Create:
     def Creating():
         try: 
             with open("Programming.txt", "a") as file:
-                userInput1 = input("Please enter the name of the book: ")
+                userInput1 = input("Please enter the name of the book: ")    
                 print("Please enter the book's ID number: ")
+                
                 try:
                     userInput2 = int(input())
 
@@ -49,7 +50,7 @@ class Create:
                     userInput2 = 0
 
                 if userInput2 > 0:
-                    file.write(userInput1 + userInput2)
+                    file.write(("\n" + str(userInput2) + " " + userInput1))
                     print("Successfully appended to the document!")
                     print("Press 1 to return to the main menu, or anything else to close the program")
                     try:
@@ -59,6 +60,7 @@ class Create:
                         userInput = 0
 
                     if userInput == 1:
+                        file.close()
                         UserInteraction.PrintMainMenu()
 
                     else:
@@ -66,6 +68,7 @@ class Create:
 
                 else:
                     print("What you entered was not valid, please try again.")
+                    file.close()
                     Create.Creating()
     
         except FileNotFoundError:
@@ -82,20 +85,21 @@ class Read:
     def Reading():
         try: 
             with open("Programming.txt", "r") as file:
-                for line in file:
-                    print(line.strip())
-                    print("Press 1 to return to the main menu, or anything else to close the program")
-                    try:
-                        userInput = int(input())
+                print(file.read())           
+                print("Press 1 to return to the main menu, or anything else to close the program")
+            
+            try:
+                userInput = int(input())
 
-                    except:
-                        userInput = 0
+            except:
+                userInput = 0
 
-                    if userInput == 1:
-                        UserInteraction.PrintMainMenu()
+            if userInput == 1:
+                file.close()
+                UserInteraction.PrintMainMenu()
 
-                    else:
-                        file.close()
+            else:
+                file.close()
         
         except FileNotFoundError:
             print("File not found.")
@@ -116,4 +120,3 @@ class Delete:
 
 
 UserInteraction.Run()
-
