@@ -152,14 +152,14 @@ class Edit:
         try: 
             try:
                 #Promps the user for the ID and book name they want to replace and what to replace it with
-                userInput1 = input("Please enter the ID the book you'd like to replace: ")
-                userInput2 = input("Please enter the name of the book you'd like to replace")
+                userInput1 = int(input("Please enter the ID the book you'd like to replace: "))
+                userInput2 = input("Please enter the name of the book you'd like to replace: ")
                 userInput3 = input("Please enter the name of the book you'd like to add: ")
 
             except:
                 userInput1 = 0
             
-            if userInput1 != 0:
+            if userInput1 > 0:
                 
                 #Opens the file in read mode
                 with open("Programming.txt","r") as file:
